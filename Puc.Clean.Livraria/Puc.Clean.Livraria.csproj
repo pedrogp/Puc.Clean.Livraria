@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="UseCases\AddToCart\" />
+    <Folder Include="UseCases\Buy\" />
+    <Folder Include="UseCases\RemoveFromCart\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

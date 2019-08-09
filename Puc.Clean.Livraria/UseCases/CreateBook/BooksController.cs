@@ -16,6 +16,14 @@ namespace Puc.Clean.Livraria.UseCases.CreateBook
         private readonly IInputBoundary<CreateBookInput> createBookInput;
         private readonly Presenter createBookPresenter;
 
+        public BooksController(
+            IInputBoundary<CreateBookInput> createBookInput,
+            Presenter createBookPresenter)
+        {
+            this.createBookInput = createBookInput;
+            this.createBookPresenter = createBookPresenter;
+        }
+
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]CreateBookRequest message)
         {

@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\AddToCart\" />
+    <Folder Include="UseCases\Buy\" />
+    <Folder Include="UseCases\RemoveFromCart\" />
+  </ItemGroup>
+
 </Project>

@@ -8,5 +8,10 @@ namespace Puc.Clean.Livraria.UseCases.CreateBook
     public class Model
     {
         public string BookName { get; set; }
+
+        public Model(string bookName)
+        {
+            BookName = bookName;
+        }
     }
 }
