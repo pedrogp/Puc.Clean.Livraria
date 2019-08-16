@@ -8,7 +8,7 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
     {
         public string BookName { get; set; }
         public string Isbn { get; set; }
-        public string[] Authors { get; set; }
+        public string Author { get; set; }
         public double Price { get; set; }
     }
 }

@@ -10,4 +10,8 @@
     <Folder Include="UseCases\RemoveFromCart\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Puc.Clean.Livraria.Domain\Puc.Clean.Livraria.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

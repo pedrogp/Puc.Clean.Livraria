@@ -1,4 +1,5 @@
-﻿using Puc.Clean.Livraria.Domain.Books;
+﻿using Puc.Clean.Livraria.Application.Repositories;
+using Puc.Clean.Livraria.Domain.Books;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Puc.Clean.Livraria.Infrastructure.DataAccess
 {
-    public class BookRepository
+    public class BookRepository : IBookReadOnlyRepository, IBookWriteOnlyRepository
     {
         private readonly BookStoreContext context;
 

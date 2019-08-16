@@ -30,7 +30,7 @@ namespace Puc.Clean.Livraria.UseCases.CreateBook
             var request = new CreateBookInput
             {
                 BookName = message.BookName,
-                Authors = message.Authors,
+                Author = message.Author,
                 Isbn = message.Isbn,
                 Price = message.Price,
             };
