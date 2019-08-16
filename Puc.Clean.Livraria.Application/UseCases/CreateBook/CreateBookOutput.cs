@@ -6,11 +6,13 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
 {
     public class CreateBookOutput
     {
-        public string BookName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Isbn { get; set; }
 
         public CreateBookOutput(string bookName)
         {
-            BookName = bookName;
+            Name = bookName;
         }
     }
 }

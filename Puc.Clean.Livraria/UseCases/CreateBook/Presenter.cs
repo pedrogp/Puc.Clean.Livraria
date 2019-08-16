@@ -23,7 +23,7 @@ namespace Puc.Clean.Livraria.UseCases.CreateBook
                 return;
             }
 
-            ViewModel = new ObjectResult(new Model(response.BookName));
+            ViewModel = new ObjectResult(new Model(response.Name));
         }
     }
 }

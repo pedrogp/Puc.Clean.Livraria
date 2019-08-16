@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Puc.Clean.Livraria.Application.Repositories;
+using Puc.Clean.Livraria.Domain.Books;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
         private readonly IOutputBoundary<CreateBookOutput> outputBoundary;
         private readonly IOutputConverter outputConverter;
 
-        public DepositInteractor(
+        public CreateBookInteractor(
             IBookReadOnlyRepository bookReadOnlyRepository,
             IBookWriteOnlyRepository bookWriteOnlyRepository,
             IOutputBoundary<CreateBookOutput> outputBoundary,
@@ -28,7 +30,7 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
         {
             Book book = await bookReadOnlyRepository.Get(input.Isbn);
             if (book != null)
-                throw new BookNotFoundException($"The book {input.Isbn} already exists.");
+                throw new BookAlreadyExistsException($"The book {input.Isbn} already exists.");
 
             Book newNook = new Book(
                 input.BookName, 
@@ -36,14 +38,9 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
                 input.Authors, 
                 input.Price);
 
-            book.Create();
+            await bookWriteOnlyRepository.Add(book);
 
-            await bookWriteOnlyRepository.Update(book);
-
-            TransactionOutput transactionResponse = outputConverter.Map<TransactionOutput>(credit);
-            DepositOutput output = new DepositOutput(transactionResponse, account.GetCurrentBalance().Value);
-
-            CreateBookOutput output = new CreateBookOutput(book.Name);
+            CreateBookOutput output = outputConverter.Map<CreateBookOutput>(book);
 
             outputBoundary.Populate(output);
         }
