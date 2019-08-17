@@ -12,7 +12,13 @@ namespace Puc.Clean.Livraria.Domain.Books
         public double Price { get; set; }
         public DateTime CreateDate { get; set; }
 
+        public Book()
+        {
+
+        }
+
         public Book(string bookName, string isbn, string authors, double price)
+            : this()
         {
             this.Name = bookName;
             this.Isbn = isbn;

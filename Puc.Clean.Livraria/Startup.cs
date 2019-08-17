@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Puc.Clean.Livraria.Application;
-using Puc.Clean.Livraria.Application.Repositories;
-using Puc.Clean.Livraria.Application.UseCases.CreateBook;
-//using Puc.Clean.Livraria.Infrastructure.DataAccess;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Puc.Clean.Livraria
@@ -29,11 +21,16 @@ namespace Puc.Clean.Livraria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
-            services.AddScoped<IInputBoundary<CreateBookInput>, CreateBookInteractor>();
-            //services.AddScoped<IBookWriteOnlyRepository, BookRepository>();
-            //services.AddScoped<IBookReadOnlyRepository, BookRepository>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen(c =>
             {
@@ -46,6 +43,11 @@ namespace Puc.Clean.Livraria
                     Contact = new Contact() { Name = "Pedro Giovannini", Email = "pedrogiovannini@gmail.com", Url = "www.google.com" }
                 });
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ConfigurationModule(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

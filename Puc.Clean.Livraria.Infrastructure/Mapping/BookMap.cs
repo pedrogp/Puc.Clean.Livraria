@@ -19,13 +19,17 @@ namespace Puc.Clean.Livraria.Infrastructure.Mapping
               .IsRequired()
               .HasColumnName("Name");
 
+            builder.Property(c => c.Author)
+              .IsRequired()
+              .HasColumnName("Author");
+
             builder.Property(c => c.Isbn)
               .IsRequired()
               .HasColumnName("Isbn");
 
             builder.Property(c => c.Price)
               .IsRequired()
-              .HasColumnName("Isbn");
+              .HasColumnName("Price");
 
             builder.Property(c => c.CreateDate)
               .IsRequired()

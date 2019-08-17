@@ -5,16 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Puc.Clean.Livraria.Infrastructure.Repository
+namespace Puc.Clean.Livraria.Infrastructure.DataAccess
 {
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private BookStoreContext context = new BookStoreContext();
 
-        public void Insert(T obj)
+        public async Task Insert(T obj)
         {
-            context.Set<T>().Add(obj);
+            await context.Set<T>().AddAsync(obj);
             context.SaveChanges();
         }
 
@@ -24,9 +25,9 @@ namespace Puc.Clean.Livraria.Infrastructure.Repository
             context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            context.Set<T>().Remove(Select(id));
+            context.Set<T>().Remove(await Select(id));
             context.SaveChanges();
         }
 
@@ -35,9 +36,9 @@ namespace Puc.Clean.Livraria.Infrastructure.Repository
             return context.Set<T>().ToList();
         }
 
-        public T Select(int id)
+        public async Task<T> Select(int id)
         {
-            return context.Set<T>().Find(id);
+            return await context.Set<T>().FindAsync(id);
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Puc.Clean.Livraria.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        void Insert(T obj);
+        Task Insert(T obj);
 
         void Update(T obj);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        T Select(int id);
+        Task<T> Select(int id);
 
         IList<T> Select();
     }

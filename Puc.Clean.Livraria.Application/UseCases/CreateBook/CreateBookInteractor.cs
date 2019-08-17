@@ -28,7 +28,7 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
 
         public async Task Process(CreateBookInput input)
         {
-            Book book = bookReadOnlyRepository.Get(input.Isbn);
+            Book book = bookReadOnlyRepository.Select(input.Isbn);
             if (book != null)
                 throw new BookAlreadyExistsException($"The book {input.Isbn} already exists.");
 
@@ -38,9 +38,9 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
                 input.Author, 
                 input.Price);
 
-            await bookWriteOnlyRepository.Add(book);
+            bookWriteOnlyRepository.Insert(newNook);
 
-            CreateBookOutput output = outputConverter.Map<CreateBookOutput>(book);
+            CreateBookOutput output = outputConverter.Map<CreateBookOutput>(newNook);
 
             outputBoundary.Populate(output);
         }

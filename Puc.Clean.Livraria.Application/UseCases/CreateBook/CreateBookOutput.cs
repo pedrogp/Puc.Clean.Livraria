@@ -10,7 +10,13 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
         public string Name { get; set; }
         public string Isbn { get; set; }
 
+        public CreateBookOutput()
+        {
+
+        }
+
         public CreateBookOutput(string bookName)
+            : this()
         {
             Name = bookName;
         }

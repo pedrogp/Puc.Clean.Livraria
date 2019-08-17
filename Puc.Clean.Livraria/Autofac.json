@@ -1,0 +1,20 @@
+{
+  "defaultAssembly": "Puc.Clean.Livraria.Infrastructure",
+  "modules": [
+    {
+      "type": "Puc.Clean.Livraria.Infrastructure.Modules.WebApiModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "Puc.Clean.Livraria.Infrastructure.Modules.ApplicationModule",
+      "properties": {
+      }
+    },
+    {
+      "type": "Puc.Clean.Livraria.Infrastructure.Modules.InfrastructureModule",
+      "properties": {
+      }
+    }
+  ]
+}

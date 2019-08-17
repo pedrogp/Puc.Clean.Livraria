@@ -8,7 +8,8 @@ namespace Puc.Clean.Livraria.Application.Repositories
 {
     public interface IBookReadOnlyRepository
     {
-        Book Get(string isbn);
-        Task<Book> Get(int id);
+        Task<Book> Select(int id);
+        IList<Book> Select();
+        Book Select(string isbn);
     }
 }

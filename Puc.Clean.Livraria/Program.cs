@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Puc.Clean.Livraria
@@ -19,6 +20,13 @@ namespace Puc.Clean.Livraria
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .UseStartup<Startup>()
+            .ConfigureAppConfiguration((builderContext, config) =>
+            {
+                IHostingEnvironment env = builderContext.HostingEnvironment;
+                config.AddJsonFile("Autofac.json");
+                config.AddEnvironmentVariables();
+            })
+            .ConfigureServices(services => services.AddAutofac());
     }
 }
