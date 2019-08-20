@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
+namespace Puc.Clean.Livraria.Application.UseCases.Common
 {
-    public class CreateBookOutput
+    public class BookOutput
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Isbn { get; set; }
 
-        public CreateBookOutput()
+        public BookOutput()
         {
 
         }
 
-        public CreateBookOutput(string bookName)
+        public BookOutput(int id, string name, string isbn)
             : this()
         {
-            Name = bookName;
+            Id = id;
+            Name = name;
+            Isbn = isbn;
         }
     }
 }

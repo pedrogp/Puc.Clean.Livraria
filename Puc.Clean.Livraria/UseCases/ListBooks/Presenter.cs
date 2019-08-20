@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Puc.Clean.Livraria.Application;
 using Puc.Clean.Livraria.Application.UseCases.Common;
-using Puc.Clean.Livraria.Application.UseCases.CreateBook;
+using Puc.Clean.Livraria.Application.UseCases.ListBooks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Puc.Clean.Livraria.UseCases.CreateBook
+namespace Puc.Clean.Livraria.UseCases.ListBooks
 {
-    public class Presenter : IOutputBoundary<BookOutput>
+    public class Presenter : IOutputBoundary<ListBooksOutput>
     {
         public IActionResult ViewModel { get; private set; }
-        public BookOutput Output { get; private set; }
+        public ListBooksOutput Output { get; private set; }
 
-        public void Populate(BookOutput response)
+        public void Populate(ListBooksOutput response)
         {
             Output = response;
 
@@ -24,7 +24,7 @@ namespace Puc.Clean.Livraria.UseCases.CreateBook
                 return;
             }
 
-            ViewModel = new ObjectResult(new Model(response.Name));
+            ViewModel = new ObjectResult(new Model(Output));
         }
     }
 }

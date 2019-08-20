@@ -1,4 +1,5 @@
 ﻿using Puc.Clean.Livraria.Application.Repositories;
+using Puc.Clean.Livraria.Application.UseCases.Common;
 using Puc.Clean.Livraria.Domain.Books;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
     {
         private readonly IBookReadOnlyRepository bookReadOnlyRepository;
         private readonly IBookWriteOnlyRepository bookWriteOnlyRepository;
-        private readonly IOutputBoundary<CreateBookOutput> outputBoundary;
+        private readonly IOutputBoundary<BookOutput> outputBoundary;
         private readonly IOutputConverter outputConverter;
 
         public CreateBookInteractor(
             IBookReadOnlyRepository bookReadOnlyRepository,
             IBookWriteOnlyRepository bookWriteOnlyRepository,
-            IOutputBoundary<CreateBookOutput> outputBoundary,
+            IOutputBoundary<BookOutput> outputBoundary,
             IOutputConverter outputConverter)
         {
             this.bookReadOnlyRepository = bookReadOnlyRepository;
@@ -40,7 +41,7 @@ namespace Puc.Clean.Livraria.Application.UseCases.CreateBook
 
             bookWriteOnlyRepository.Insert(newNook);
 
-            CreateBookOutput output = outputConverter.Map<CreateBookOutput>(newNook);
+            var output = outputConverter.Map<BookOutput>(newNook);
 
             outputBoundary.Populate(output);
         }
